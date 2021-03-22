@@ -1,0 +1,80 @@
+From 6d00f6e08133ac0db53aaa38f2901be6d2d1f81f Mon Sep 17 00:00:00 2001
+From: Saket Sarin <sarinsaket@gmail.com>
+Date: Sun, 21 Mar 2021 18:29:45 +0000
+Subject: [PATCH] Create Patch File
+
+---
+ jpm_module_1/__pycache__/client3.cpython-38.pyc | Bin 0 -> 1092 bytes
+ jpm_module_1/client_test.py                     |  12 ++++++------
+ main.py                                         |   2 +-
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+ create mode 100644 jpm_module_1/__pycache__/client3.cpython-38.pyc
+
+diff --git a/jpm_module_1/__pycache__/client3.cpython-38.pyc b/jpm_module_1/__pycache__/client3.cpython-38.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..34709cec63f91c3783ddc96ff7965be0cc2b5822
+GIT binary patch
+literal 1092
+zcmYjQPg4^y6i;@u+by(+^0#_f4~}+5ERGjtP*K2xgIHl0$BfPznparZ?v`xo0G3nr
+zdz7PJ#DgCpS5MwOdGc*4jLE#ed7J$9_mZ7zb&TK;CvQJ~4G8&J1pkjR1}iA}4^)y!
+znh;K{b+}`#%Ux?3XVT%Gbh$5?^u7>YlD;gV4WKN8Lq~mwF&GDbKnHY<d^qM6aEDc(
+z2NT09;0-5%4cR$4r{{EdwXpnJO!yRB!`ekY4JDW!(D#hb@L4{`=V2bEU}l*>O_pH>
+zW?>HI+iaE$C?!Y7m>q)vrsQ~ypsv)&!1=efA?Y@$SAXIEkj>MZ`&xIG8jU1tiDW;^
+z_0q$|hl`D)9;lP2v3&gbEdEUiX`x&W4?TvmijuFO>LV{Taz=IGIW;0(Jdd6^HfEQx
+z+jsiz9Fg7)a>n|!i2AI}5RHGj6gE{Rdo2h>l7v}1)cX*o01{;QNhCeUL!E_tkb)8#
+zi$W>1=w@-ML*wN-YaN=B&brZVEREMyaSKMV$Pa%x2(eC$*G@8_>z?tBdYJ}Qq)iz=
+zh(`5gtR1<k_`7dJjidSVsIi}QprLvxp51uae6{fE_1ezH`u&CGy9Wzf>&=bELAMii
+z5PbsC{YEQ^A=MA=bx%xX5A+)1Y+9VSS#B?z8_-Fd6{@P3YZW*yM&TD?shvirPbI~x
+zQ;}pF$?ek{XzR|VD*9pZ)g4~4_#<)Q?AnEqs$iW75XY9#aaPAD_fZiVP)5~+U5%oS
+zh|?%Kz5S*jMuxZYQ0VXuQnPd`zZ)Vi*4ksxtDgpTH>@-6v*)YEU0Z)qzs@ImDoNtq
+zdkXOS<eK}V*f1S;fU|=<OS!K^Dzgsv-t4Szy)$&va&QSG6&;8o!(!}@@vwFe42_J3
+zos&5)UF=-KowF{a#&2h;BeY=(gfzZwY|ed)G*|ebiEXngp0O&(x2?4|B-Q`XRCHR6
+kxLO`{^2rRQ@(@*kT;X(?%bcJbc!4uXLx*8*5@pu;3$_dmm;e9(
+
+literal 0
+HcmV?d00001
+
+diff --git a/jpm_module_1/client_test.py b/jpm_module_1/client_test.py
+index af2bf26..705a4cf 100644
+--- a/jpm_module_1/client_test.py
++++ b/jpm_module_1/client_test.py
+@@ -7,18 +7,18 @@ class ClientTest(unittest.TestCase):
+       {'top_ask': {'price': 121.2, 'size': 36}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 120.48, 'size': 109}, 'id': '0.109974697771', 'stock': 'ABC'},
+       {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
+     ]
+-    """ ------------ Add the assertion below ------------ """
++    
++    for quote in quotes:
++      self.assertEqual(getDataPoint(quote), (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], (quote['top_bid']['price'] + quote['top_ask']['price'])/2))
+ 
+   def test_getDataPoint_calculatePriceBidGreaterThanAsk(self):
+     quotes = [
+       {'top_ask': {'price': 119.2, 'size': 36}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 120.48, 'size': 109}, 'id': '0.109974697771', 'stock': 'ABC'},
+       {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
+     ]
+-    """ ------------ Add the assertion below ------------ """
+-
+-
+-  """ ------------ Add more unit tests ------------ """
+-
++    
++    for quote in quotes:
++      self.assertEqual(getDataPoint(quote), (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], (quote['top_bid']['price'] + quote['top_ask']['price'])/2))
+ 
+ 
+ if __name__ == '__main__':
+diff --git a/main.py b/main.py
+index fa65496..157abb9 100644
+--- a/main.py
++++ b/main.py
+@@ -30,5 +30,5 @@ os.killpg(os.getpgid(process.pid), signal.SIGTERM)
+ # TO UNCOMMENT JUST REMOVE THE '#'
+ 
+ print("UNIT TEST RESULTS BELOW...")
+-process2 = subprocess.Popen(['python', #'client_test.py'], cwd=os.getcwd(), #preexec_fn=os.setsid)
++process2 = subprocess.Popen(['python', 'client_test.py'], cwd=os.getcwd(), preexec_fn=os.setsid)
+ process2.wait()
+\ No newline at end of file
+-- 
+2.17.1
+
